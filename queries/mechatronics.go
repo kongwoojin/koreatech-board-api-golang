@@ -1,6 +1,7 @@
 package queries
 
 import (
+	"fmt"
 	"github.com/labstack/echo/v4"
 	"koreatech-board-api/db"
 	"koreatech-board-api/model"
@@ -26,7 +27,9 @@ func SelectMechaQuery(c echo.Context) error {
 	case "free":
 		board = "244"
 	default:
-		return c.NoContent(http.StatusNotFound)
+		return c.JSON(http.StatusNotFound, map[string]string{
+			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
+		})
 	}
 
 	page, pageErr := strconv.Atoi(c.QueryParam("page"))
@@ -64,7 +67,9 @@ func SelectMechaQuery(c echo.Context) error {
 	)
 
 	if listQuery != nil || countQuery != nil {
-		return c.JSONBlob(http.StatusBadRequest, []byte{})
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"error": "Query error!",
+		})
 	}
 
 	apiData := model.APIData{
@@ -87,7 +92,9 @@ func MechaArticleQuery(c echo.Context) error {
 	)
 
 	if articleQuery != nil {
-		return c.JSONBlob(http.StatusBadRequest, []byte{})
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"error": "Query error!",
+		})
 	}
 
 	return c.JSON(http.StatusOK, results[0])

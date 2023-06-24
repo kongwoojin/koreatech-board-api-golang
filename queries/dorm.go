@@ -58,7 +58,9 @@ func SelectDormQuery(c echo.Context) error {
 	)
 
 	if listQuery != nil || countQuery != nil {
-		return c.JSONBlob(http.StatusBadRequest, []byte{})
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"error": "Query error!",
+		})
 	}
 
 	apiData := model.APIData{
@@ -81,7 +83,9 @@ func DormArticleQuery(c echo.Context) error {
 	)
 
 	if articleQuery != nil {
-		return c.JSONBlob(http.StatusBadRequest, []byte{})
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"error": "Query error!",
+		})
 	}
 
 	return c.JSON(http.StatusOK, results[0])

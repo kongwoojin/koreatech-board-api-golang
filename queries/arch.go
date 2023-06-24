@@ -21,7 +21,9 @@ func SelectArchQuery(c echo.Context) error {
 	case "free":
 		board = "341"
 	default:
-		return c.NoContent(http.StatusNotFound)
+		return c.JSON(http.StatusNotFound, map[string]string{
+			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
+		})
 	}
 
 	page, pageErr := strconv.Atoi(c.QueryParam("page"))
@@ -60,7 +62,9 @@ func SelectArchQuery(c echo.Context) error {
 
 	if listQuery != nil || countQuery != nil {
 		fmt.Println(listQuery.Error())
-		return c.JSONBlob(http.StatusBadRequest, []byte{})
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"error": "Query error!",
+		})
 	}
 
 	apiData := model.APIData{
@@ -84,7 +88,9 @@ func ArchArticleQuery(c echo.Context) error {
 
 	if articleQuery != nil {
 		fmt.Println(articleQuery.Error())
-		return c.JSONBlob(http.StatusBadRequest, []byte{})
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"error": "Query error!",
+		})
 	}
 
 	return c.JSON(http.StatusOK, results[0])
