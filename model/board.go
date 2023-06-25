@@ -7,6 +7,6 @@ type Board struct {
 	Num       string           `edgedb:"num" json:"num"`
 	Title     string           `edgedb:"title" json:"title"`
 	Writer    string           `edgedb:"writer" json:"writer"`
-	WriteDate edgedb.LocalDate `edgedb:"write_date" json:"write_date"`
+	WriteDate edgedb.LocalDate `edgedb:"write_date" json:"write_date" swaggertype:"string"`
 	ReadCount int64            `edgedb:"read_count" json:"read_count"`
 }

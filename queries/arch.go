@@ -10,6 +10,15 @@ import (
 	"strconv"
 )
 
+//	@Summary		Get article list
+//	@Description	Get arch article list
+//	@Tags			arch
+//	@Accept			json
+//	@Produce		json
+//	@Param			board	path		string	true	"name of the board"
+//	@Success		200		{object}	model.APIData
+//	@Failure		404
+//	@Router			/arch/{board} [get]
 func SelectArchQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
@@ -75,6 +84,15 @@ func SelectArchQuery(c echo.Context) error {
 	return c.JSON(http.StatusOK, apiData)
 }
 
+//	@Summary		Get article
+//	@Description	Get arch article by UUID
+//	@Tags			arch
+//	@Accept			json
+//	@Produce		json
+//	@Param			uuid	query		string	true	"uuid of article"
+//	@Success		200		{object}	model.Article
+//	@Failure		404
+//	@Router			/article/arch [get]
 func ArchArticleQuery(c echo.Context) error {
 	var results []model.Article
 

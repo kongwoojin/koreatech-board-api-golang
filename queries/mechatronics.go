@@ -10,6 +10,15 @@ import (
 	"strconv"
 )
 
+//	@Summary		Get article list
+//	@Description	Get mechatronics article list
+//	@Tags			mechatronics
+//	@Accept			json
+//	@Produce		json
+//	@Param			board	path		string	true	"name of the board"
+//	@Success		200		{object}	model.APIData
+//	@Failure		404
+//	@Router			/mechatronics/{board} [get]
 func SelectMechaQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
@@ -80,6 +89,15 @@ func SelectMechaQuery(c echo.Context) error {
 	return c.JSON(http.StatusOK, apiData)
 }
 
+//	@Summary		Get article
+//	@Description	Get mechatronics article by UUID
+//	@Tags			mechatronics
+//	@Accept			json
+//	@Produce		json
+//	@Param			uuid	query		string	true	"uuid of article"
+//	@Success		200		{object}	model.Article
+//	@Failure		404
+//	@Router			/article/mechatronics [get]
 func MechaArticleQuery(c echo.Context) error {
 	var results []model.Article
 

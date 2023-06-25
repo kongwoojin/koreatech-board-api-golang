@@ -10,6 +10,15 @@ import (
 	"strconv"
 )
 
+//	@Summary		Get article list
+//	@Description	Get emc article list
+//	@Tags			emc
+//	@Accept			json
+//	@Produce		json
+//	@Param			board	path		string	true	"name of the board"
+//	@Success		200		{object}	model.APIData
+//	@Failure		404
+//	@Router			/emc/{board} [get]
 func SelectEmcQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
@@ -72,6 +81,15 @@ func SelectEmcQuery(c echo.Context) error {
 	return c.JSON(http.StatusOK, apiData)
 }
 
+//	@Summary		Get article
+//	@Description	Get emc article by UUID
+//	@Tags			emc
+//	@Accept			json
+//	@Produce		json
+//	@Param			uuid	query		string	true	"uuid of article"
+//	@Success		200		{object}	model.Article
+//	@Failure		404
+//	@Router			/article/emc [get]
 func EmcArticleQuery(c echo.Context) error {
 	var results []model.Article
 

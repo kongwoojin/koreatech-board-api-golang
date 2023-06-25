@@ -9,6 +9,15 @@ import (
 	"strconv"
 )
 
+//	@Summary		Get article list
+//	@Description	Get dorm article list
+//	@Tags			dorm
+//	@Accept			json
+//	@Produce		json
+//	@Param			board	path		string	true	"name of the board"
+//	@Success		200		{object}	model.APIData
+//	@Failure		404
+//	@Router			/dorm/{board} [get]
 func SelectDormQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
@@ -71,6 +80,15 @@ func SelectDormQuery(c echo.Context) error {
 	return c.JSON(http.StatusOK, apiData)
 }
 
+//	@Summary		Get article
+//	@Description	Get dorm article by UUID
+//	@Tags			dorm
+//	@Accept			json
+//	@Produce		json
+//	@Param			uuid	query		string	true	"uuid of article"
+//	@Success		200		{object}	model.Article
+//	@Failure		404
+//	@Router			/article/dorm [get]
 func DormArticleQuery(c echo.Context) error {
 	var results []model.Article
 
