@@ -71,6 +71,14 @@ paths:
         name: board
         required: true
         type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
       produces:
       - application/json
       responses:
@@ -324,6 +332,14 @@ paths:
         name: board
         required: true
         type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
       produces:
       - application/json
       responses:
@@ -347,6 +363,14 @@ paths:
         name: board
         required: true
         type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
       produces:
       - application/json
       responses:
@@ -370,6 +394,14 @@ paths:
         name: board
         required: true
         type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
       produces:
       - application/json
       responses:
@@ -393,6 +425,14 @@ paths:
         name: board
         required: true
         type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
       produces:
       - application/json
       responses:
@@ -416,6 +456,14 @@ paths:
         name: board
         required: true
         type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
       produces:
       - application/json
       responses:
@@ -439,6 +487,14 @@ paths:
         name: board
         required: true
         type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
       produces:
       - application/json
       responses:
@@ -462,6 +518,14 @@ paths:
         name: board
         required: true
         type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
       produces:
       - application/json
       responses:
@@ -485,6 +549,14 @@ paths:
         name: board
         required: true
         type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
       produces:
       - application/json
       responses:
@@ -508,6 +580,14 @@ paths:
         name: board
         required: true
         type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
       produces:
       - application/json
       responses:

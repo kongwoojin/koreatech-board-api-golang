@@ -14,8 +14,10 @@ import (
 //	@Tags			dorm
 //	@Accept			json
 //	@Produce		json
-//	@Param			board	path		string	true	"name of the board"
-//	@Success		200		{object}	model.APIData
+//	@Param			board			path		string	true	"name of the board"
+//	@Param			page			query		integer	false	"page of board"
+//	@Param			num_of_items	query		integer	false	"items per page"
+//	@Success		200				{object}	model.APIData
 //	@Failure		404
 //	@Router			/dorm/{board} [get]
 func SelectDormQuery(c echo.Context) error {

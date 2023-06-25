@@ -39,6 +39,18 @@ const docTemplate = `{
                         "name": "board",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -424,6 +436,18 @@ const docTemplate = `{
                         "name": "board",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -459,6 +483,18 @@ const docTemplate = `{
                         "name": "board",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -494,6 +530,18 @@ const docTemplate = `{
                         "name": "board",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -529,6 +577,18 @@ const docTemplate = `{
                         "name": "board",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -564,6 +624,18 @@ const docTemplate = `{
                         "name": "board",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -599,6 +671,18 @@ const docTemplate = `{
                         "name": "board",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -634,6 +718,18 @@ const docTemplate = `{
                         "name": "board",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -669,6 +765,18 @@ const docTemplate = `{
                         "name": "board",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -704,6 +812,18 @@ const docTemplate = `{
                         "name": "board",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
                     }
                 ],
                 "responses": {
