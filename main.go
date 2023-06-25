@@ -6,6 +6,7 @@ import (
 	echoSwagger "github.com/swaggo/echo-swagger"
 	_ "koreatech-board-api/docs"
 	"koreatech-board-api/routes"
+	"os"
 )
 
 //	@title			KOREATECH board REST API
@@ -20,8 +21,17 @@ func main() {
 	// Echo instance
 	e := echo.New()
 
+	f, err := os.Create("access.log")
+
+	if err != nil {
+		panic(err)
+	}
+
 	// Middleware
-	e.Use(middleware.Logger())
+	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+		Format: "${time_rfc3339}: ip=${remote_ip}, method=${method}, uri=${uri}, status=${status}, user_agent=${user_agents}\n",
+		Output: f,
+	}))
 	e.Use(middleware.Recover())
 
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
