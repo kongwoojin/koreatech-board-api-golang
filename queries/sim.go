@@ -10,6 +10,15 @@ import (
 	"strconv"
 )
 
+//	@Summary		Get article list
+//	@Description	Get sim article list
+//	@Tags			sim
+//	@Accept			json
+//	@Produce		json
+//	@Param			board	path		string	true	"name of the board"
+//	@Success		200		{object}	model.APIData
+//	@Failure		404
+//	@Router			/sim/{board} [get]
 func SelectSimQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
@@ -72,6 +81,15 @@ func SelectSimQuery(c echo.Context) error {
 	return c.JSON(http.StatusOK, apiData)
 }
 
+//	@Summary		Get article
+//	@Description	Get sim article by UUID
+//	@Tags			sim
+//	@Accept			json
+//	@Produce		json
+//	@Param			uuid	query		string	true	"uuid of article"
+//	@Success		200		{object}	model.Article
+//	@Failure		404
+//	@Router			/article/sim [get]
 func SimArticleQuery(c echo.Context) error {
 	var results []model.Article
 
