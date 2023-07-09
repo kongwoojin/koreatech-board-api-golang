@@ -10,17 +10,17 @@ import (
 	"strconv"
 )
 
-//	@Summary		Get article list
-//	@Description	Get arch article list
-//	@Tags			arch
-//	@Accept			json
-//	@Produce		json
-//	@Param			board			path		string	true	"name of the board"
-//	@Param			page			query		integer	false	"page of board"
-//	@Param			num_of_items	query		integer	false	"items per page"
-//	@Success		200				{object}	model.APIData
-//	@Failure		404
-//	@Router			/arch/{board} [get]
+// @Summary		Get article list
+// @Description	Get arch article list
+// @Tags			arch
+// @Accept			json
+// @Produce		json
+// @Param			board			path		string	true	"name of the board"
+// @Param			page			query		integer	false	"page of board"
+// @Param			num_of_items	query		integer	false	"items per page"
+// @Success		200				{object}	model.APIData
+// @Failure		404
+// @Router			/arch/{board} [get]
 func SelectArchQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
@@ -79,22 +79,22 @@ func SelectArchQuery(c echo.Context) error {
 	}
 
 	apiData := model.APIData{
-		LastPage: int(math.Ceil(float64(int(count[0]) / numOfItems))),
+		LastPage: int(math.Ceil(float64(count[0]) / float64(numOfItems))),
 		Posts:    results,
 	}
 
 	return c.JSON(http.StatusOK, apiData)
 }
 
-//	@Summary		Get article
-//	@Description	Get arch article by UUID
-//	@Tags			arch
-//	@Accept			json
-//	@Produce		json
-//	@Param			uuid	query		string	true	"uuid of article"
-//	@Success		200		{object}	model.Article
-//	@Failure		404
-//	@Router			/article/arch [get]
+// @Summary		Get article
+// @Description	Get arch article by UUID
+// @Tags			arch
+// @Accept			json
+// @Produce		json
+// @Param			uuid	query		string	true	"uuid of article"
+// @Success		200		{object}	model.Article
+// @Failure		404
+// @Router			/article/arch [get]
 func ArchArticleQuery(c echo.Context) error {
 	var results []model.Article
 
