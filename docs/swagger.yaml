@@ -91,6 +91,42 @@ paths:
       summary: Get article list
       tags:
       - arch
+  /arch/{board}/search/title:
+    get:
+      consumes:
+      - application/json
+      description: Search article from specific board by title
+      parameters:
+      - description: name of the board
+        in: path
+        name: board
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Article'
+        "404":
+          description: Not Found
+      summary: Search article by title
+      tags:
+      - arch
   /article/arch:
     get:
       consumes:
@@ -352,6 +388,42 @@ paths:
       summary: Get article list
       tags:
       - cse
+  /cse/{board}/search/title:
+    get:
+      consumes:
+      - application/json
+      description: Search article from specific board by title
+      parameters:
+      - description: name of the board
+        in: path
+        name: board
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Article'
+        "404":
+          description: Not Found
+      summary: Search article by title
+      tags:
+      - cse
   /dorm/{board}:
     get:
       consumes:
@@ -381,6 +453,42 @@ paths:
         "404":
           description: Not Found
       summary: Get article list
+      tags:
+      - dorm
+  /dorm/{board}/search/title:
+    get:
+      consumes:
+      - application/json
+      description: Search article from specific board by title
+      parameters:
+      - description: name of the board
+        in: path
+        name: board
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Article'
+        "404":
+          description: Not Found
+      summary: Search article by title
       tags:
       - dorm
   /emc/{board}:
@@ -414,6 +522,42 @@ paths:
       summary: Get article list
       tags:
       - emc
+  /emc/{board}/search/title:
+    get:
+      consumes:
+      - application/json
+      description: Search article from specific board by title
+      parameters:
+      - description: name of the board
+        in: path
+        name: board
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Article'
+        "404":
+          description: Not Found
+      summary: Search article by title
+      tags:
+      - emc
   /ide/{board}:
     get:
       consumes:
@@ -443,6 +587,42 @@ paths:
         "404":
           description: Not Found
       summary: Get article list
+      tags:
+      - ide
+  /ide/{board}/search/title:
+    get:
+      consumes:
+      - application/json
+      description: Search article from specific board by title
+      parameters:
+      - description: name of the board
+        in: path
+        name: board
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Article'
+        "404":
+          description: Not Found
+      summary: Search article by title
       tags:
       - ide
   /ite/{board}:
@@ -476,6 +656,42 @@ paths:
       summary: Get article list
       tags:
       - ite
+  /ite/{board}/search/title:
+    get:
+      consumes:
+      - application/json
+      description: Search article from specific board by title
+      parameters:
+      - description: name of the board
+        in: path
+        name: board
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Article'
+        "404":
+          description: Not Found
+      summary: Search article by title
+      tags:
+      - ite
   /mechanical/{board}:
     get:
       consumes:
@@ -505,6 +721,42 @@ paths:
         "404":
           description: Not Found
       summary: Get article list
+      tags:
+      - mechanical
+  /mechanical/{board}/search/title:
+    get:
+      consumes:
+      - application/json
+      description: Search article from specific board by title
+      parameters:
+      - description: name of the board
+        in: path
+        name: board
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Article'
+        "404":
+          description: Not Found
+      summary: Search article by title
       tags:
       - mechanical
   /mechatronics/{board}:
@@ -538,6 +790,42 @@ paths:
       summary: Get article list
       tags:
       - mechatronics
+  /mechatronics/{board}/search/title:
+    get:
+      consumes:
+      - application/json
+      description: Search article from specific board by title
+      parameters:
+      - description: name of the board
+        in: path
+        name: board
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Article'
+        "404":
+          description: Not Found
+      summary: Search article by title
+      tags:
+      - mechatronics
   /school/{board}:
     get:
       consumes:
@@ -569,6 +857,42 @@ paths:
       summary: Get article list
       tags:
       - school
+  /school/{board}/search/title:
+    get:
+      consumes:
+      - application/json
+      description: Search article from specific board by title
+      parameters:
+      - description: name of the board
+        in: path
+        name: board
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Article'
+        "404":
+          description: Not Found
+      summary: Search article by title
+      tags:
+      - school
   /sim/{board}:
     get:
       consumes:
@@ -598,6 +922,42 @@ paths:
         "404":
           description: Not Found
       summary: Get article list
+      tags:
+      - sim
+  /sim/{board}/search/title:
+    get:
+      consumes:
+      - application/json
+      description: Search article from specific board by title
+      parameters:
+      - description: name of the board
+        in: path
+        name: board
+        required: true
+        type: string
+      - description: title
+        in: query
+        name: title
+        required: true
+        type: string
+      - description: page of board
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: num_of_items
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Article'
+        "404":
+          description: Not Found
+      summary: Search article by title
       tags:
       - sim
 swagger: "2.0"
