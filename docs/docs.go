@@ -66,6 +66,60 @@ const docTemplate = `{
                 }
             }
         },
+        "/arch/{board}/search/title": {
+            "get": {
+                "description": "Search article from specific board by title",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "arch"
+                ],
+                "summary": "Search article by title",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Article"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/article/arch": {
             "get": {
                 "description": "Get arch article by UUID",
@@ -463,6 +517,60 @@ const docTemplate = `{
                 }
             }
         },
+        "/cse/{board}/search/title": {
+            "get": {
+                "description": "Search article from specific board by title",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "cse"
+                ],
+                "summary": "Search article by title",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Article"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/dorm/{board}": {
             "get": {
                 "description": "Get dorm article list",
@@ -502,6 +610,60 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/model.APIData"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/dorm/{board}/search/title": {
+            "get": {
+                "description": "Search article from specific board by title",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "dorm"
+                ],
+                "summary": "Search article by title",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Article"
                         }
                     },
                     "404": {
@@ -557,6 +719,60 @@ const docTemplate = `{
                 }
             }
         },
+        "/emc/{board}/search/title": {
+            "get": {
+                "description": "Search article from specific board by title",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "emc"
+                ],
+                "summary": "Search article by title",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Article"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/ide/{board}": {
             "get": {
                 "description": "Get ide article list",
@@ -596,6 +812,60 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/model.APIData"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/ide/{board}/search/title": {
+            "get": {
+                "description": "Search article from specific board by title",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ide"
+                ],
+                "summary": "Search article by title",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Article"
                         }
                     },
                     "404": {
@@ -651,6 +921,60 @@ const docTemplate = `{
                 }
             }
         },
+        "/ite/{board}/search/title": {
+            "get": {
+                "description": "Search article from specific board by title",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ite"
+                ],
+                "summary": "Search article by title",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Article"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/mechanical/{board}": {
             "get": {
                 "description": "Get mechanical article list",
@@ -690,6 +1014,60 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/model.APIData"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/mechanical/{board}/search/title": {
+            "get": {
+                "description": "Search article from specific board by title",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "mechanical"
+                ],
+                "summary": "Search article by title",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Article"
                         }
                     },
                     "404": {
@@ -745,6 +1123,60 @@ const docTemplate = `{
                 }
             }
         },
+        "/mechatronics/{board}/search/title": {
+            "get": {
+                "description": "Search article from specific board by title",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "mechatronics"
+                ],
+                "summary": "Search article by title",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Article"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/school/{board}": {
             "get": {
                 "description": "Get school article list",
@@ -792,6 +1224,60 @@ const docTemplate = `{
                 }
             }
         },
+        "/school/{board}/search/title": {
+            "get": {
+                "description": "Search article from specific board by title",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "school"
+                ],
+                "summary": "Search article by title",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Article"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/sim/{board}": {
             "get": {
                 "description": "Get sim article list",
@@ -831,6 +1317,60 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/model.APIData"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/sim/{board}/search/title": {
+            "get": {
+                "description": "Search article from specific board by title",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "sim"
+                ],
+                "summary": "Search article by title",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "title",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page of board",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "items per page",
+                        "name": "num_of_items",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Article"
                         }
                     },
                     "404": {
