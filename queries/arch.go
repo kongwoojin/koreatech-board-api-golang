@@ -48,7 +48,7 @@ func SelectArchQuery(c echo.Context) error {
 		numOfItems = 20
 	}
 
-	var results []model.Board
+	results := []model.Board{}
 	var count []int64
 
 	listArgs := map[string]interface{}{"board": board, "offset": int64((page - 1) * numOfItems), "num_of_items": int64(numOfItems)}
@@ -156,7 +156,7 @@ func ArchSearchWithTitleQuery(c echo.Context) error {
 		numOfItems = 20
 	}
 
-	var results []model.Board
+	results := []model.Board{}
 	var count []int64
 
 	listArgs := map[string]interface{}{"board": board, "title": title, "offset": int64((page - 1) * numOfItems), "num_of_items": int64(numOfItems)}
