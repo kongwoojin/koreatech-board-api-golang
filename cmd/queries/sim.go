@@ -3,16 +3,16 @@ package queries
 import (
 	"fmt"
 	"github.com/labstack/echo/v4"
-	"koreatech-board-api/db"
-	"koreatech-board-api/model"
+	"koreatech-board-api/cmd/db"
+	"koreatech-board-api/cmd/model"
 	"math"
 	"net/http"
 	"strconv"
 )
 
 // @Summary		Get article list
-// @Description	Get ide article list
-// @Tags			ide
+// @Description	Get sim article list
+// @Tags			sim
 // @Accept			json
 // @Produce		json
 // @Param			board			path		string	true	"name of the board"
@@ -20,17 +20,15 @@ import (
 // @Param			num_of_items	query		integer	false	"items per page"
 // @Success		200				{object}	model.APIData
 // @Failure		404
-// @Router			/ide/{board} [get]
-func SelectIdeQuery(c echo.Context) error {
+// @Router			/sim/{board} [get]
+func SelectSimQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
 	var board = ""
 
 	switch boardRaw {
 	case "notice":
-		board = "330"
-	case "free":
-		board = "332"
+		board = "373"
 	default:
 		return c.JSON(http.StatusNotFound, map[string]string{
 			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
@@ -54,7 +52,7 @@ func SelectIdeQuery(c echo.Context) error {
 	listArgs := map[string]interface{}{"board": board, "offset": int64((page - 1) * numOfItems), "num_of_items": int64(numOfItems)}
 
 	var listQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT ide 
+		`SELECT sim 
 		{ id, num, title, writer, write_date, read_count }
 		FILTER .board = <str>$board order by contains(.num, '공지') DESC
 		THEN .write_date DESC
@@ -66,7 +64,7 @@ func SelectIdeQuery(c echo.Context) error {
 	countArgs := map[string]interface{}{"board": board}
 
 	var countQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT count(ide filter .board=<str>$board)`,
+		`SELECT count(sim filter .board=<str>$board)`,
 		&count,
 		countArgs,
 	)
@@ -86,19 +84,19 @@ func SelectIdeQuery(c echo.Context) error {
 }
 
 // @Summary		Get article
-// @Description	Get ide article by UUID
-// @Tags			ide
+// @Description	Get sim article by UUID
+// @Tags			sim
 // @Accept			json
 // @Produce		json
 // @Param			uuid	query		string	true	"uuid of article"
 // @Success		200		{object}	model.Article
 // @Failure		404
-// @Router			/article/ide [get]
-func IdeArticleQuery(c echo.Context) error {
+// @Router			/article/sim [get]
+func SimArticleQuery(c echo.Context) error {
 	var results []model.Article
 
 	var articleQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT ide
+		`SELECT sim
 		{ id, title, writer, write_date, article_url, content, files: {file_name, file_url} }
 		FILTER .id = <uuid><str>$0`,
 		&results,
@@ -116,7 +114,7 @@ func IdeArticleQuery(c echo.Context) error {
 
 // @Summary		Search article by title
 // @Description	Search article from specific board by title
-// @Tags			ide
+// @Tags			sim
 // @Accept			json
 // @Produce		json
 // @Param			board			path		string	true	"name of the board"
@@ -125,17 +123,15 @@ func IdeArticleQuery(c echo.Context) error {
 // @Param			num_of_items	query		integer	false	"items per page"
 // @Success		200		{object}	model.Article
 // @Failure		404
-// @Router			/ide/{board}/search/title [get]
-func IdeSearchWithTitleQuery(c echo.Context) error {
+// @Router			/sim/{board}/search/title [get]
+func SimSearchWithTitleQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
 	var board = ""
 
 	switch boardRaw {
 	case "notice":
-		board = "330"
-	case "free":
-		board = "332"
+		board = "373"
 	default:
 		return c.JSON(http.StatusNotFound, map[string]string{
 			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
@@ -160,7 +156,7 @@ func IdeSearchWithTitleQuery(c echo.Context) error {
 	listArgs := map[string]interface{}{"board": board, "title": title, "offset": int64((page - 1) * numOfItems), "num_of_items": int64(numOfItems)}
 
 	var listQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT ide 
+		`SELECT sim 
 		{ id, num, title, writer, write_date, read_count }
 		FILTER .board = <str>$board and .title ilike <str>$title order by contains(.num, '공지') DESC
 		THEN .write_date DESC
@@ -172,7 +168,7 @@ func IdeSearchWithTitleQuery(c echo.Context) error {
 	countArgs := map[string]interface{}{"board": board, "title": title}
 
 	var countQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT count(ide filter .board=<str>$board and .title ilike <str>$title)`,
+		`SELECT count(sim filter .board=<str>$board and .title ilike <str>$title)`,
 		&count,
 		countArgs,
 	)
