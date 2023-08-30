@@ -3,16 +3,16 @@ package queries
 import (
 	"fmt"
 	"github.com/labstack/echo/v4"
-	"koreatech-board-api/db"
-	"koreatech-board-api/model"
+	"koreatech-board-api/cmd/db"
+	"koreatech-board-api/cmd/model"
 	"math"
 	"net/http"
 	"strconv"
 )
 
 // @Summary		Get article list
-// @Description	Get cse article list
-// @Tags			cse
+// @Description	Get mechatronics article list
+// @Tags			mechatronics
 // @Accept			json
 // @Produce		json
 // @Param			board			path		string	true	"name of the board"
@@ -20,26 +20,29 @@ import (
 // @Param			num_of_items	query		integer	false	"items per page"
 // @Success		200				{object}	model.APIData
 // @Failure		404
-// @Router			/cse/{board} [get]
-func SelectCseQuery(c echo.Context) error {
+// @Router			/mechatronics/{board} [get]
+func SelectMechaQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
 	var board = ""
 
 	switch boardRaw {
 	case "notice":
-		board = "notice"
-	case "free":
-		board = "freeboard"
+		board = "235"
+	case "lecture":
+		board = "236"
+	case "bachelor":
+		board = "237"
 	case "job":
-		board = "jobboard"
-	case "pds":
-		board = "pds"
+		board = "238"
+	case "free":
+		board = "244"
 	default:
 		return c.JSON(http.StatusNotFound, map[string]string{
 			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
 		})
 	}
+
 	page, pageErr := strconv.Atoi(c.QueryParam("page"))
 	numOfItems, noiErr := strconv.Atoi(c.QueryParam("num_of_items"))
 
@@ -57,7 +60,7 @@ func SelectCseQuery(c echo.Context) error {
 	listArgs := map[string]interface{}{"board": board, "offset": int64((page - 1) * numOfItems), "num_of_items": int64(numOfItems)}
 
 	var listQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT cse 
+		`SELECT mechatronics 
 		{ id, num, title, writer, write_date, read_count }
 		FILTER .board = <str>$board order by contains(.num, '공지') DESC
 		THEN .write_date DESC
@@ -69,7 +72,7 @@ func SelectCseQuery(c echo.Context) error {
 	countArgs := map[string]interface{}{"board": board}
 
 	var countQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT count(cse filter .board=<str>$board)`,
+		`SELECT count(mechatronics filter .board=<str>$board)`,
 		&count,
 		countArgs,
 	)
@@ -89,19 +92,19 @@ func SelectCseQuery(c echo.Context) error {
 }
 
 // @Summary		Get article
-// @Description	Get cse article by UUID
-// @Tags			cse
+// @Description	Get mechatronics article by UUID
+// @Tags			mechatronics
 // @Accept			json
 // @Produce		json
 // @Param			uuid	query		string	true	"uuid of article"
 // @Success		200		{object}	model.Article
 // @Failure		404
-// @Router			/article/cse [get]
-func CseArticleQuery(c echo.Context) error {
+// @Router			/article/mechatronics [get]
+func MechaArticleQuery(c echo.Context) error {
 	var results []model.Article
 
 	var articleQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT cse
+		`SELECT mechatronics
 		{ id, title, writer, write_date, article_url, content, files: {file_name, file_url} }
 		FILTER .id = <uuid><str>$0`,
 		&results,
@@ -119,7 +122,7 @@ func CseArticleQuery(c echo.Context) error {
 
 // @Summary		Search article by title
 // @Description	Search article from specific board by title
-// @Tags			cse
+// @Tags			mechatronics
 // @Accept			json
 // @Produce		json
 // @Param			board			path		string	true	"name of the board"
@@ -128,21 +131,23 @@ func CseArticleQuery(c echo.Context) error {
 // @Param			num_of_items	query		integer	false	"items per page"
 // @Success		200		{object}	model.Article
 // @Failure		404
-// @Router			/cse/{board}/search/title [get]
-func CseSearchWithTitleQuery(c echo.Context) error {
+// @Router			/mechatronics/{board}/search/title [get]
+func MechatronicsSearchWithTitleQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
 	var board = ""
 
 	switch boardRaw {
 	case "notice":
-		board = "notice"
-	case "free":
-		board = "freeboard"
+		board = "235"
+	case "lecture":
+		board = "236"
+	case "bachelor":
+		board = "237"
 	case "job":
-		board = "jobboard"
-	case "pds":
-		board = "pds"
+		board = "238"
+	case "free":
+		board = "244"
 	default:
 		return c.JSON(http.StatusNotFound, map[string]string{
 			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
@@ -167,7 +172,7 @@ func CseSearchWithTitleQuery(c echo.Context) error {
 	listArgs := map[string]interface{}{"board": board, "title": title, "offset": int64((page - 1) * numOfItems), "num_of_items": int64(numOfItems)}
 
 	var listQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT cse 
+		`SELECT mechatronics 
 		{ id, num, title, writer, write_date, read_count }
 		FILTER .board = <str>$board and .title ilike <str>$title order by contains(.num, '공지') DESC
 		THEN .write_date DESC
@@ -179,7 +184,7 @@ func CseSearchWithTitleQuery(c echo.Context) error {
 	countArgs := map[string]interface{}{"board": board, "title": title}
 
 	var countQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT count(cse filter .board=<str>$board and .title ilike <str>$title)`,
+		`SELECT count(mechatronics filter .board=<str>$board and .title ilike <str>$title)`,
 		&count,
 		countArgs,
 	)

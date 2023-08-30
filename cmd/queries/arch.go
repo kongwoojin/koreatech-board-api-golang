@@ -3,16 +3,16 @@ package queries
 import (
 	"fmt"
 	"github.com/labstack/echo/v4"
-	"koreatech-board-api/db"
-	"koreatech-board-api/model"
+	"koreatech-board-api/cmd/db"
+	"koreatech-board-api/cmd/model"
 	"math"
 	"net/http"
 	"strconv"
 )
 
 // @Summary		Get article list
-// @Description	Get school article list
-// @Tags			school
+// @Description	Get arch article list
+// @Tags			arch
 // @Accept			json
 // @Produce		json
 // @Param			board			path		string	true	"name of the board"
@@ -20,21 +20,17 @@ import (
 // @Param			num_of_items	query		integer	false	"items per page"
 // @Success		200				{object}	model.APIData
 // @Failure		404
-// @Router			/school/{board} [get]
-func SelectSchoolQuery(c echo.Context) error {
+// @Router			/arch/{board} [get]
+func SelectArchQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
 	var board = ""
 
 	switch boardRaw {
 	case "notice":
-		board = "list"
-	case "scholar":
-		board = "scholarList"
-	case "bachelor":
-		board = "bachelorList"
-	case "covid19":
-		board = "boardList8"
+		board = "340"
+	case "free":
+		board = "341"
 	default:
 		return c.JSON(http.StatusNotFound, map[string]string{
 			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
@@ -58,11 +54,11 @@ func SelectSchoolQuery(c echo.Context) error {
 	listArgs := map[string]interface{}{"board": board, "offset": int64((page - 1) * numOfItems), "num_of_items": int64(numOfItems)}
 
 	var listQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT school 
-		{ id, num, title, writer, write_date, read_count } 
-		FILTER .board=<str>$board order by .is_importance DESC 
+		`SELECT arch 
+		{ id, num, title, writer, write_date, read_count }
+		FILTER .board = <str>$board order by contains(.num, '공지') DESC
 		THEN .write_date DESC
-		THEN .num desc offset <int64>$offset limit <int64>$num_of_items`,
+		THEN .num DESC OFFSET <int64>$offset limit <int64>$num_of_items`,
 		&results,
 		listArgs,
 	)
@@ -70,12 +66,13 @@ func SelectSchoolQuery(c echo.Context) error {
 	countArgs := map[string]interface{}{"board": board}
 
 	var countQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT count(school filter .board=<str>$board)`,
+		`SELECT count(arch filter .board=<str>$board)`,
 		&count,
 		countArgs,
 	)
 
 	if listQuery != nil || countQuery != nil {
+		fmt.Println(listQuery.Error())
 		return c.JSON(http.StatusBadRequest, map[string]string{
 			"error": "Query error!",
 		})
@@ -90,19 +87,19 @@ func SelectSchoolQuery(c echo.Context) error {
 }
 
 // @Summary		Get article
-// @Description	Get school article by UUID
-// @Tags			school
+// @Description	Get arch article by UUID
+// @Tags			arch
 // @Accept			json
 // @Produce		json
 // @Param			uuid	query		string	true	"uuid of article"
 // @Success		200		{object}	model.Article
 // @Failure		404
-// @Router			/article/school [get]
-func SchoolArticleQuery(c echo.Context) error {
+// @Router			/article/arch [get]
+func ArchArticleQuery(c echo.Context) error {
 	var results []model.Article
 
 	var articleQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT school
+		`SELECT arch
 		{ id, title, writer, write_date, article_url, content, files: {file_name, file_url} }
 		FILTER .id = <uuid><str>$0`,
 		&results,
@@ -110,6 +107,7 @@ func SchoolArticleQuery(c echo.Context) error {
 	)
 
 	if articleQuery != nil {
+		fmt.Println(articleQuery.Error())
 		return c.JSON(http.StatusBadRequest, map[string]string{
 			"error": "Query error!",
 		})
@@ -120,7 +118,7 @@ func SchoolArticleQuery(c echo.Context) error {
 
 // @Summary		Search article by title
 // @Description	Search article from specific board by title
-// @Tags			school
+// @Tags			arch
 // @Accept			json
 // @Produce		json
 // @Param			board			path		string	true	"name of the board"
@@ -129,21 +127,17 @@ func SchoolArticleQuery(c echo.Context) error {
 // @Param			num_of_items	query		integer	false	"items per page"
 // @Success		200		{object}	model.Article
 // @Failure		404
-// @Router			/school/{board}/search/title [get]
-func SchoolSearchWithTitleQuery(c echo.Context) error {
+// @Router			/arch/{board}/search/title [get]
+func ArchSearchWithTitleQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
 	var board = ""
 
 	switch boardRaw {
 	case "notice":
-		board = "list"
-	case "scholar":
-		board = "scholarList"
-	case "bachelor":
-		board = "bachelorList"
-	case "covid19":
-		board = "boardList8"
+		board = "340"
+	case "free":
+		board = "341"
 	default:
 		return c.JSON(http.StatusNotFound, map[string]string{
 			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
@@ -168,7 +162,7 @@ func SchoolSearchWithTitleQuery(c echo.Context) error {
 	listArgs := map[string]interface{}{"board": board, "title": title, "offset": int64((page - 1) * numOfItems), "num_of_items": int64(numOfItems)}
 
 	var listQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT school 
+		`SELECT arch 
 		{ id, num, title, writer, write_date, read_count }
 		FILTER .board = <str>$board and .title ilike <str>$title order by contains(.num, '공지') DESC
 		THEN .write_date DESC
@@ -180,7 +174,7 @@ func SchoolSearchWithTitleQuery(c echo.Context) error {
 	countArgs := map[string]interface{}{"board": board, "title": title}
 
 	var countQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT count(school filter .board=<str>$board and .title ilike <str>$title)`,
+		`SELECT count(arch filter .board=<str>$board and .title ilike <str>$title)`,
 		&count,
 		countArgs,
 	)

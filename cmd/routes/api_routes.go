@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/labstack/echo/v4"
-	"koreatech-board-api/queries"
+	"koreatech-board-api/cmd/queries"
 )
 
 func APIRouter(e *echo.Echo) {

@@ -3,16 +3,16 @@ package queries
 import (
 	"fmt"
 	"github.com/labstack/echo/v4"
-	"koreatech-board-api/db"
-	"koreatech-board-api/model"
+	"koreatech-board-api/cmd/db"
+	"koreatech-board-api/cmd/model"
 	"math"
 	"net/http"
 	"strconv"
 )
 
 // @Summary		Get article list
-// @Description	Get sim article list
-// @Tags			sim
+// @Description	Get school article list
+// @Tags			school
 // @Accept			json
 // @Produce		json
 // @Param			board			path		string	true	"name of the board"
@@ -20,15 +20,21 @@ import (
 // @Param			num_of_items	query		integer	false	"items per page"
 // @Success		200				{object}	model.APIData
 // @Failure		404
-// @Router			/sim/{board} [get]
-func SelectSimQuery(c echo.Context) error {
+// @Router			/school/{board} [get]
+func SelectSchoolQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
 	var board = ""
 
 	switch boardRaw {
 	case "notice":
-		board = "373"
+		board = "list"
+	case "scholar":
+		board = "scholarList"
+	case "bachelor":
+		board = "bachelorList"
+	case "covid19":
+		board = "boardList8"
 	default:
 		return c.JSON(http.StatusNotFound, map[string]string{
 			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
@@ -52,11 +58,11 @@ func SelectSimQuery(c echo.Context) error {
 	listArgs := map[string]interface{}{"board": board, "offset": int64((page - 1) * numOfItems), "num_of_items": int64(numOfItems)}
 
 	var listQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT sim 
-		{ id, num, title, writer, write_date, read_count }
-		FILTER .board = <str>$board order by contains(.num, '공지') DESC
+		`SELECT school 
+		{ id, num, title, writer, write_date, read_count } 
+		FILTER .board=<str>$board order by .is_importance DESC 
 		THEN .write_date DESC
-		THEN .num DESC OFFSET <int64>$offset limit <int64>$num_of_items`,
+		THEN .num desc offset <int64>$offset limit <int64>$num_of_items`,
 		&results,
 		listArgs,
 	)
@@ -64,7 +70,7 @@ func SelectSimQuery(c echo.Context) error {
 	countArgs := map[string]interface{}{"board": board}
 
 	var countQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT count(sim filter .board=<str>$board)`,
+		`SELECT count(school filter .board=<str>$board)`,
 		&count,
 		countArgs,
 	)
@@ -84,19 +90,19 @@ func SelectSimQuery(c echo.Context) error {
 }
 
 // @Summary		Get article
-// @Description	Get sim article by UUID
-// @Tags			sim
+// @Description	Get school article by UUID
+// @Tags			school
 // @Accept			json
 // @Produce		json
 // @Param			uuid	query		string	true	"uuid of article"
 // @Success		200		{object}	model.Article
 // @Failure		404
-// @Router			/article/sim [get]
-func SimArticleQuery(c echo.Context) error {
+// @Router			/article/school [get]
+func SchoolArticleQuery(c echo.Context) error {
 	var results []model.Article
 
 	var articleQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT sim
+		`SELECT school
 		{ id, title, writer, write_date, article_url, content, files: {file_name, file_url} }
 		FILTER .id = <uuid><str>$0`,
 		&results,
@@ -114,7 +120,7 @@ func SimArticleQuery(c echo.Context) error {
 
 // @Summary		Search article by title
 // @Description	Search article from specific board by title
-// @Tags			sim
+// @Tags			school
 // @Accept			json
 // @Produce		json
 // @Param			board			path		string	true	"name of the board"
@@ -123,15 +129,21 @@ func SimArticleQuery(c echo.Context) error {
 // @Param			num_of_items	query		integer	false	"items per page"
 // @Success		200		{object}	model.Article
 // @Failure		404
-// @Router			/sim/{board}/search/title [get]
-func SimSearchWithTitleQuery(c echo.Context) error {
+// @Router			/school/{board}/search/title [get]
+func SchoolSearchWithTitleQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
 
 	var board = ""
 
 	switch boardRaw {
 	case "notice":
-		board = "373"
+		board = "list"
+	case "scholar":
+		board = "scholarList"
+	case "bachelor":
+		board = "bachelorList"
+	case "covid19":
+		board = "boardList8"
 	default:
 		return c.JSON(http.StatusNotFound, map[string]string{
 			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
@@ -156,7 +168,7 @@ func SimSearchWithTitleQuery(c echo.Context) error {
 	listArgs := map[string]interface{}{"board": board, "title": title, "offset": int64((page - 1) * numOfItems), "num_of_items": int64(numOfItems)}
 
 	var listQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT sim 
+		`SELECT school 
 		{ id, num, title, writer, write_date, read_count }
 		FILTER .board = <str>$board and .title ilike <str>$title order by contains(.num, '공지') DESC
 		THEN .write_date DESC
@@ -168,7 +180,7 @@ func SimSearchWithTitleQuery(c echo.Context) error {
 	countArgs := map[string]interface{}{"board": board, "title": title}
 
 	var countQuery = db.Pool.Query(c.Request().Context(),
-		`SELECT count(sim filter .board=<str>$board and .title ilike <str>$title)`,
+		`SELECT count(school filter .board=<str>$board and .title ilike <str>$title)`,
 		&count,
 		countArgs,
 	)
