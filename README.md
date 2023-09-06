@@ -1,11 +1,11 @@
-## Koreatech notice board REST API
+## koreatech-board-api
 비공식 한국기술교육대학교 공지사항, 게시판 클라이언트 REST API
 
 ## 사용된 기술 스택
 * [Go](https://go.dev/)
 * [EdgeDB](https://www.edgedb.com/)
 
-## 사용된  라이브러리
+## 사용된 라이브러리
 * [echo](https://echo.labstack.com/)
 * [edgedb-go](github.com/edgedb/edgedb-go)
 
@@ -20,5 +20,6 @@
 * [한국기술교육대학교 에너지신소재 화학공학부](https://cms3.koreatech.ac.kr/emc/index.do)
 * [한국기술교육대학교 산업경영학부](https://cms3.koreatech.ac.kr/sim/index.do)
 
-## 클라이언트
-* [Android](https://github.com/kongwoojin/koreatech_board_client_android)
+## 관련 프로젝트
+* [koreatech-board-android](https://github.com/kongwoojin/koreatech-board-android)
+* [koreatech-board-crawler](https://github.com/kongwoojin/koreatech-board-crawler)
