@@ -16,7 +16,7 @@ import (
 //	@contact.name	Developer
 //	@contact.email	kongwoojin03@gmail.com
 
-// @BasePath	/v3
+// @BasePath	/
 func main() {
 	// Echo instance
 	e := echo.New()
