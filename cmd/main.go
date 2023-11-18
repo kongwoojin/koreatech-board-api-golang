@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	echoSwagger "github.com/swaggo/echo-swagger"
@@ -18,6 +20,18 @@ import (
 
 // @BasePath	/
 func main() {
+	// Parse flags
+	host := flag.String("h", "localhost", "Set host")
+	port := flag.String("p", "1323", "Set port")
+	help := flag.Bool("help", false, "Show help")
+
+	flag.Parse()
+
+	if *help {
+		flag.Usage()
+		os.Exit(0)
+	}
+
 	// Echo instance
 	e := echo.New()
 
@@ -39,5 +53,5 @@ func main() {
 	routes.APIRouter(e)
 
 	// Start server
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(fmt.Sprint(*host, ":", *port)))
 }
