@@ -3,11 +3,10 @@ package db
 import (
 	"context"
 	"fmt"
+	"github.com/edgedb/edgedb-go"
 	"github.com/joho/godotenv"
 	"log"
 	"os"
-
-	"github.com/edgedb/edgedb-go"
 )
 
 var Pool = connect()
@@ -26,7 +25,7 @@ func connect() *edgedb.Client {
 
 	ctx := context.Background()
 	opts := edgedb.Options{
-		Concurrency: 4,
+		Concurrency: 0,
 	}
 	pool, err := edgedb.CreateClientDSN(ctx, fmt.Sprintf("edgedb://%s:%s@%s:%s/%s", edgeDBUser, edgeDBPasswd, edgeDBHost, edgeDBPort, edgeDBName), opts)
 
