@@ -139,3 +139,4 @@ go.work
 
 # EdgeDB credential file
 credential.json
+.env
