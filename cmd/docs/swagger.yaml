@@ -2,6 +2,9 @@ basePath: /v3
 definitions:
   model.APIData:
     properties:
+      error:
+        description: Error message
+        type: string
       last_page:
         description: Last page of requested board
         type: integer
@@ -10,12 +13,18 @@ definitions:
         items:
           $ref: '#/definitions/model.Board'
         type: array
+      status_code:
+        description: Status code of request
+        type: integer
     type: object
-  model.Article:
+  model.ApiArticle:
     properties:
       article_url:
         type: string
       content:
+        type: string
+      error:
+        description: Error message
         type: string
       files:
         items:
@@ -23,6 +32,9 @@ definitions:
         type: array
       id:
         type: string
+      status_code:
+        description: Status code of request
+        type: integer
       title:
         type: string
       write_date:
@@ -86,6 +98,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article list
@@ -121,7 +135,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Search article by title
@@ -144,7 +160,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article
@@ -167,7 +185,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article
@@ -190,7 +210,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article
@@ -213,7 +235,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article
@@ -236,7 +260,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article
@@ -259,7 +285,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article
@@ -282,7 +310,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article
@@ -305,7 +335,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article
@@ -328,7 +360,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article
@@ -351,7 +385,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article
@@ -383,6 +419,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article list
@@ -418,7 +456,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Search article by title
@@ -450,6 +490,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article list
@@ -485,7 +527,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Search article by title
@@ -517,6 +561,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article list
@@ -552,7 +598,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Search article by title
@@ -584,6 +632,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article list
@@ -619,7 +669,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Search article by title
@@ -651,6 +703,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article list
@@ -686,7 +740,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Search article by title
@@ -718,6 +774,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article list
@@ -753,7 +811,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Search article by title
@@ -785,6 +845,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article list
@@ -820,7 +882,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Search article by title
@@ -852,6 +916,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article list
@@ -887,7 +953,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Search article by title
@@ -919,6 +987,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Get article list
@@ -954,7 +1024,9 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/model.Article'
+            $ref: '#/definitions/model.ApiArticle'
+        "400":
+          description: Bad Request
         "404":
           description: Not Found
       summary: Search article by title

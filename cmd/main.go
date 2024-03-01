@@ -18,7 +18,7 @@ import (
 //	@contact.name	Developer
 //	@contact.email	kongwoojin03@gmail.com
 
-// @BasePath	/
+// @BasePath	/v3
 func main() {
 	// Parse flags
 	host := flag.String("h", "localhost", "Set host")

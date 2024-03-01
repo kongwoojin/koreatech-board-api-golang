@@ -19,10 +19,14 @@ import (
 // @Param			page			query		integer	false	"page of board"
 // @Param			num_of_items	query		integer	false	"items per page"
 // @Success		200				{object}	model.APIData
+// @Failure		400
 // @Failure		404
 // @Router			/cse/{board} [get]
 func SelectCseQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
+
+	apiError := ""
+	status := http.StatusOK
 
 	var board = ""
 
@@ -36,9 +40,8 @@ func SelectCseQuery(c echo.Context) error {
 	case "pds":
 		board = "pds"
 	default:
-		return c.JSON(http.StatusNotFound, map[string]string{
-			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
-		})
+		status = http.StatusNotFound
+		apiError = fmt.Sprintf("Board \"%s\" not found!", boardRaw)
 	}
 	page, pageErr := strconv.Atoi(c.QueryParam("page"))
 	numOfItems, noiErr := strconv.Atoi(c.QueryParam("num_of_items"))
@@ -75,17 +78,18 @@ func SelectCseQuery(c echo.Context) error {
 	)
 
 	if listQuery != nil || countQuery != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{
-			"error": "Query error!",
-		})
+		status = http.StatusBadRequest
+		apiError = "Query error!"
 	}
 
 	apiData := model.APIData{
-		LastPage: int(math.Ceil(float64(count[0]) / float64(numOfItems))),
-		Posts:    results,
+		StatusCode: status,
+		LastPage:   int(math.Ceil(float64(count[0]) / float64(numOfItems))),
+		Error:      apiError,
+		Posts:      results,
 	}
 
-	return c.JSON(http.StatusOK, apiData)
+	return c.JSON(status, apiData)
 }
 
 // @Summary		Get article
@@ -94,11 +98,15 @@ func SelectCseQuery(c echo.Context) error {
 // @Accept			json
 // @Produce		json
 // @Param			uuid	query		string	true	"uuid of article"
-// @Success		200		{object}	model.Article
+// @Success		200		{object}	model.ApiArticle
+// @Failure		400
 // @Failure		404
 // @Router			/article/cse [get]
 func CseArticleQuery(c echo.Context) error {
 	var results []model.Article
+
+	apiError := ""
+	status := http.StatusOK
 
 	var articleQuery = db.Pool.Query(c.Request().Context(),
 		`SELECT cse
@@ -109,12 +117,30 @@ func CseArticleQuery(c echo.Context) error {
 	)
 
 	if articleQuery != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{
-			"error": "Query error!",
-		})
+		status = http.StatusBadRequest
+		apiError = "Query error!"
 	}
 
-	return c.JSON(http.StatusOK, results[0])
+	if len(results) == 0 {
+		article := model.ApiArticle{
+			StatusCode: status,
+			Error:      apiError,
+		}
+		return c.JSON(status, article)
+	} else {
+		article := model.ApiArticle{
+			StatusCode: status,
+			Error:      apiError,
+			Id:         results[0].Id,
+			Title:      results[0].Title,
+			Writer:     results[0].Writer,
+			WriteDate:  results[0].WriteDate,
+			ArticleUrl: results[0].ArticleUrl,
+			Content:    results[0].Content,
+			Files:      results[0].Files,
+		}
+		return c.JSON(status, article)
+	}
 }
 
 // @Summary		Search article by title
@@ -126,11 +152,15 @@ func CseArticleQuery(c echo.Context) error {
 // @Param			title	query		string	true	"title"
 // @Param			page			query		integer	false	"page of board"
 // @Param			num_of_items	query		integer	false	"items per page"
-// @Success		200		{object}	model.Article
+// @Success		200		{object}	model.ApiArticle
+// @Failure		400
 // @Failure		404
 // @Router			/cse/{board}/search/title [get]
 func CseSearchWithTitleQuery(c echo.Context) error {
 	boardRaw := c.Param("board")
+
+	apiError := ""
+	status := http.StatusOK
 
 	var board = ""
 
@@ -144,9 +174,8 @@ func CseSearchWithTitleQuery(c echo.Context) error {
 	case "pds":
 		board = "pds"
 	default:
-		return c.JSON(http.StatusNotFound, map[string]string{
-			"error": fmt.Sprintf("Board \"%s\" not found!", boardRaw),
-		})
+		status = http.StatusNotFound
+		apiError = fmt.Sprintf("Board \"%s\" not found!", boardRaw)
 	}
 	title := "%" + c.QueryParam("title") + "%"
 
@@ -192,9 +221,11 @@ func CseSearchWithTitleQuery(c echo.Context) error {
 	}
 
 	apiData := model.APIData{
-		LastPage: int(math.Ceil(float64(count[0]) / float64(numOfItems))),
-		Posts:    results,
+		StatusCode: status,
+		LastPage:   int(math.Ceil(float64(count[0]) / float64(numOfItems))),
+		Error:      apiError,
+		Posts:      results,
 	}
 
-	return c.JSON(http.StatusOK, apiData)
+	return c.JSON(status, apiData)
 }
