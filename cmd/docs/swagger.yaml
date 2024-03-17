@@ -47,7 +47,7 @@ definitions:
       id:
         type: string
       num:
-        type: string
+        type: integer
       read_count:
         type: integer
       title:
@@ -72,13 +72,38 @@ info:
   title: KOREATECH board REST API
   version: "1.0"
 paths:
-  /arch/{board}:
+  /{department}/{board}:
     get:
       consumes:
       - application/json
-      description: Get arch article list
+      description: Get notice list
       parameters:
+      - description: name of the department
+        enum:
+        - arch
+        - cse
+        - dorm
+        - mse
+        - ace
+        - ide
+        - ite
+        - mechanical
+        - mechatronics
+        - school
+        - sim
+        in: path
+        name: department
+        required: true
+        type: string
       - description: name of the board
+        enum:
+        - notice
+        - free
+        - job
+        - pds
+        - lecture
+        - bachelor
+        - scholar
         in: path
         name: board
         required: true
@@ -102,16 +127,41 @@ paths:
           description: Bad Request
         "404":
           description: Not Found
-      summary: Get article list
+      summary: Get notice list
       tags:
-      - arch
-  /arch/{board}/search/title:
+      - Notice
+  /{department}/{board}/search/title:
     get:
       consumes:
       - application/json
       description: Search article from specific board by title
       parameters:
+      - description: name of the department
+        enum:
+        - arch
+        - cse
+        - dorm
+        - mse
+        - ace
+        - ide
+        - ite
+        - mechanical
+        - mechatronics
+        - school
+        - sim
+        in: path
+        name: department
+        required: true
+        type: string
       - description: name of the board
+        enum:
+        - notice
+        - free
+        - job
+        - pds
+        - lecture
+        - bachelor
+        - scholar
         in: path
         name: board
         required: true
@@ -142,12 +192,12 @@ paths:
           description: Not Found
       summary: Search article by title
       tags:
-      - arch
-  /article/arch:
+      - Notice
+  /article:
     get:
       consumes:
       - application/json
-      description: Get arch article by UUID
+      description: Get article by UUID
       parameters:
       - description: uuid of article
         in: query
@@ -167,869 +217,5 @@ paths:
           description: Not Found
       summary: Get article
       tags:
-      - arch
-  /article/cse:
-    get:
-      consumes:
-      - application/json
-      description: Get cse article by UUID
-      parameters:
-      - description: uuid of article
-        in: query
-        name: uuid
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article
-      tags:
-      - cse
-  /article/dorm:
-    get:
-      consumes:
-      - application/json
-      description: Get dorm article by UUID
-      parameters:
-      - description: uuid of article
-        in: query
-        name: uuid
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article
-      tags:
-      - dorm
-  /article/emc:
-    get:
-      consumes:
-      - application/json
-      description: Get emc article by UUID
-      parameters:
-      - description: uuid of article
-        in: query
-        name: uuid
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article
-      tags:
-      - emc
-  /article/ide:
-    get:
-      consumes:
-      - application/json
-      description: Get ide article by UUID
-      parameters:
-      - description: uuid of article
-        in: query
-        name: uuid
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article
-      tags:
-      - ide
-  /article/ite:
-    get:
-      consumes:
-      - application/json
-      description: Get ite article by UUID
-      parameters:
-      - description: uuid of article
-        in: query
-        name: uuid
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article
-      tags:
-      - ite
-  /article/mechanical:
-    get:
-      consumes:
-      - application/json
-      description: Get mechanical article by UUID
-      parameters:
-      - description: uuid of article
-        in: query
-        name: uuid
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article
-      tags:
-      - mechanical
-  /article/mechatronics:
-    get:
-      consumes:
-      - application/json
-      description: Get mechatronics article by UUID
-      parameters:
-      - description: uuid of article
-        in: query
-        name: uuid
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article
-      tags:
-      - mechatronics
-  /article/school:
-    get:
-      consumes:
-      - application/json
-      description: Get school article by UUID
-      parameters:
-      - description: uuid of article
-        in: query
-        name: uuid
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article
-      tags:
-      - school
-  /article/sim:
-    get:
-      consumes:
-      - application/json
-      description: Get sim article by UUID
-      parameters:
-      - description: uuid of article
-        in: query
-        name: uuid
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article
-      tags:
-      - sim
-  /cse/{board}:
-    get:
-      consumes:
-      - application/json
-      description: Get cse article list
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.APIData'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article list
-      tags:
-      - cse
-  /cse/{board}/search/title:
-    get:
-      consumes:
-      - application/json
-      description: Search article from specific board by title
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: title
-        in: query
-        name: title
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Search article by title
-      tags:
-      - cse
-  /dorm/{board}:
-    get:
-      consumes:
-      - application/json
-      description: Get dorm article list
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.APIData'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article list
-      tags:
-      - dorm
-  /dorm/{board}/search/title:
-    get:
-      consumes:
-      - application/json
-      description: Search article from specific board by title
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: title
-        in: query
-        name: title
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Search article by title
-      tags:
-      - dorm
-  /emc/{board}:
-    get:
-      consumes:
-      - application/json
-      description: Get emc article list
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.APIData'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article list
-      tags:
-      - emc
-  /emc/{board}/search/title:
-    get:
-      consumes:
-      - application/json
-      description: Search article from specific board by title
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: title
-        in: query
-        name: title
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Search article by title
-      tags:
-      - emc
-  /ide/{board}:
-    get:
-      consumes:
-      - application/json
-      description: Get ide article list
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.APIData'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article list
-      tags:
-      - ide
-  /ide/{board}/search/title:
-    get:
-      consumes:
-      - application/json
-      description: Search article from specific board by title
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: title
-        in: query
-        name: title
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Search article by title
-      tags:
-      - ide
-  /ite/{board}:
-    get:
-      consumes:
-      - application/json
-      description: Get ite article list
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.APIData'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article list
-      tags:
-      - ite
-  /ite/{board}/search/title:
-    get:
-      consumes:
-      - application/json
-      description: Search article from specific board by title
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: title
-        in: query
-        name: title
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Search article by title
-      tags:
-      - ite
-  /mechanical/{board}:
-    get:
-      consumes:
-      - application/json
-      description: Get mechanical article list
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.APIData'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article list
-      tags:
-      - mechanical
-  /mechanical/{board}/search/title:
-    get:
-      consumes:
-      - application/json
-      description: Search article from specific board by title
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: title
-        in: query
-        name: title
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Search article by title
-      tags:
-      - mechanical
-  /mechatronics/{board}:
-    get:
-      consumes:
-      - application/json
-      description: Get mechatronics article list
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.APIData'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article list
-      tags:
-      - mechatronics
-  /mechatronics/{board}/search/title:
-    get:
-      consumes:
-      - application/json
-      description: Search article from specific board by title
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: title
-        in: query
-        name: title
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Search article by title
-      tags:
-      - mechatronics
-  /school/{board}:
-    get:
-      consumes:
-      - application/json
-      description: Get school article list
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.APIData'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article list
-      tags:
-      - school
-  /school/{board}/search/title:
-    get:
-      consumes:
-      - application/json
-      description: Search article from specific board by title
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: title
-        in: query
-        name: title
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Search article by title
-      tags:
-      - school
-  /sim/{board}:
-    get:
-      consumes:
-      - application/json
-      description: Get sim article list
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.APIData'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Get article list
-      tags:
-      - sim
-  /sim/{board}/search/title:
-    get:
-      consumes:
-      - application/json
-      description: Search article from specific board by title
-      parameters:
-      - description: name of the board
-        in: path
-        name: board
-        required: true
-        type: string
-      - description: title
-        in: query
-        name: title
-        required: true
-        type: string
-      - description: page of board
-        in: query
-        name: page
-        type: integer
-      - description: items per page
-        in: query
-        name: num_of_items
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/model.ApiArticle'
-        "400":
-          description: Bad Request
-        "404":
-          description: Not Found
-      summary: Search article by title
-      tags:
-      - sim
+      - Notice
 swagger: "2.0"
