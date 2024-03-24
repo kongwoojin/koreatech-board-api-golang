@@ -42,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Koreatech-Board-${{ env.MODIFIED_BRANCH_NAME }}-debug
-          path: build/
+          path: ./build
