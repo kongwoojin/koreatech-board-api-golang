@@ -40,8 +40,6 @@ func GetNotices(c echo.Context) error {
 
 	board, ok := enums.ParseBoard(boardRaw)
 
-	fmt.Printf("Board: %v\n", board)
-
 	if !ok {
 		status = http.StatusNotFound
 		apiError = fmt.Sprintf("Board \"%s\" not found!", boardRaw)
