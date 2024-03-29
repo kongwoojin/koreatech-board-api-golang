@@ -67,7 +67,7 @@ func SearchWithTitle(c echo.Context) error {
 
 		var listQuery = db.Pool.Query(c.Request().Context(),
 			`SELECT notice 
-		{ id, num, title, writer, write_date, read_count }
+		{ id, num, title, writer, write_date, read_count, is_new := .init_crawled_time = .update_crawled_time }
 		FILTER .department=<Department><str>$department AND .board=<Board><str>$board
 		AND .title ilike <str>$title order by .is_notice DESC
 		THEN .write_date DESC
