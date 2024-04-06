@@ -15,7 +15,6 @@ RUN cp /build/koreatech-board-api .
 
 FROM scratch
 COPY --from=builder /dist/koreatech-board-api .
-COPY credential.json ./
 
 EXPOSE 1323
 
