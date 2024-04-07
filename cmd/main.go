@@ -21,7 +21,7 @@ import (
 // @BasePath	/v3
 func main() {
 	// Parse flags
-	host := flag.String("h", "localhost", "Set host")
+	host := flag.String("h", "0.0.0.0", "Set host")
 	port := flag.String("p", "1323", "Set port")
 	help := flag.Bool("help", false, "Show help")
 
