@@ -14,6 +14,7 @@ WORKDIR /dist
 RUN cp /build/koreatech-board-api .
 
 FROM scratch
+COPY --from=builder /etc/ssl /etc/ssl
 COPY --from=builder /dist/koreatech-board-api .
 
 EXPOSE 1323
