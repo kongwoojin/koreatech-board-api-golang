@@ -11,5 +11,6 @@ type ApiArticle struct {
 	WriteDate  edgedb.LocalDate `json:"write_date" swaggertype:"string"`
 	ArticleUrl string           `json:"article_url"`
 	Content    string           `json:"content"`
+	IsNotice   bool             `json:"is_notice"`
 	Files      []Files          `json:"files"`
 }

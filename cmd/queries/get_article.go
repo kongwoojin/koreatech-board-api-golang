@@ -25,7 +25,7 @@ func GetArticle(c echo.Context) error {
 
 	var articleQuery = db.Pool.Query(c.Request().Context(),
 		`SELECT notice
-		{ id, title, writer, write_date, article_url, content, files: {file_name, file_url} }
+		{ id, title, writer, write_date, article_url, content, is_notice, files: {file_name, file_url} }
 		FILTER .id = <uuid><str>$0`,
 		&results,
 		c.QueryParam("uuid"),
@@ -52,6 +52,7 @@ func GetArticle(c echo.Context) error {
 			WriteDate:  results[0].WriteDate,
 			ArticleUrl: results[0].ArticleUrl,
 			Content:    results[0].Content,
+			IsNotice:   results[0].IsNotice,
 			Files:      results[0].Files,
 		}
 		return c.JSON(status, article)

@@ -9,5 +9,6 @@ type Article struct {
 	WriteDate  edgedb.LocalDate `edgedb:"write_date" json:"write_date" swaggertype:"string"`
 	ArticleUrl string           `edgedb:"article_url" json:"article_url"`
 	Content    string           `edgedb:"content" json:"content"`
+	IsNotice   bool             `edgedb:"is_notice" json:"is_notice"`
 	Files      []Files          `edgedb:"files" json:"files"`
 }

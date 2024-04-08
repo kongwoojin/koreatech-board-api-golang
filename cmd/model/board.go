@@ -10,4 +10,5 @@ type Board struct {
 	WriteDate edgedb.LocalDate `edgedb:"write_date" json:"write_date" swaggertype:"string"`
 	ReadCount int64            `edgedb:"read_count" json:"read_count"`
 	IsNew     bool             `edgedb:"is_new" json:"is_new"`
+	IsNotice  bool             `edgedb:"is_notice" json:"is_notice"`
 }
