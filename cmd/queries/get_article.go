@@ -25,7 +25,7 @@ func GetArticle(c echo.Context) error {
 
 	var articleQuery = db.Pool.Query(c.Request().Context(),
 		`SELECT notice
-		{ id, title, writer, write_date, article_url, content, is_notice, files: {file_name, file_url} }
+		{ id, num, title, writer, write_date, article_url, content, is_notice, files: {file_name, file_url} }
 		FILTER .id = <uuid><str>$0`,
 		&results,
 		c.QueryParam("uuid"),
@@ -46,6 +46,7 @@ func GetArticle(c echo.Context) error {
 		article := model.ApiArticle{
 			StatusCode: status,
 			Error:      apiError,
+			Num:        results[0].Num,
 			Id:         results[0].Id,
 			Title:      results[0].Title,
 			Writer:     results[0].Writer,

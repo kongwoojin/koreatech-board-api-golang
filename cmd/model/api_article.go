@@ -5,6 +5,7 @@ import "github.com/edgedb/edgedb-go"
 type ApiArticle struct {
 	StatusCode int              `json:"status_code"` // Status code of request
 	Error      string           `json:"error"`       // Error message
+	Num        int64            `json:"num"`
 	Id         edgedb.UUID      `json:"id"`
 	Title      string           `json:"title"`
 	Writer     string           `json:"writer"`

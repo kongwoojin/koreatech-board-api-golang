@@ -4,6 +4,7 @@ import "github.com/edgedb/edgedb-go"
 
 type Article struct {
 	Id         edgedb.UUID      `edgedb:"id" json:"id"`
+	Num        int64            `edgedb:"num" json:"num"`
 	Title      string           `edgedb:"title" json:"title"`
 	Writer     string           `edgedb:"writer" json:"writer"`
 	WriteDate  edgedb.LocalDate `edgedb:"write_date" json:"write_date" swaggertype:"string"`
