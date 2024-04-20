@@ -10,7 +10,7 @@
 * [edgedb-go](github.com/edgedb/edgedb-go)
 
 ## Swagger
-[Koreatech Board API](https://api.koreatech.kongjak.com/swagger/index.html)
+* [Koreatech Board API](https://api.koreatech.kongjak.com/swagger/index.html)
 
 ## 지원하는 게시판
 * [한국기술교육대학교](https://koreatech.ac.kr/)
