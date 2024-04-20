@@ -12,6 +12,32 @@
 ## Swagger
 * [Koreatech Board API](https://api.koreatech.kongjak.com/swagger/index.html)
 
+## 설치
+### Docker
+1. Docker Hub에서 이미지를 다운로드합니다.
+``` console
+docker pull kongjak/koreatech-board-api:latest
+```
+2. Docker 컨테이너를 실행합니다.
+``` console
+docker run --env=EDGEDB_HOST=HOST --env=EDGEDB_PORT=PORT --env=EDGEDB_DBNAME=DBNAME --env=EDGEDB_USER=USER --env=EDGEDB_PASSWD=PASSWD -p 1323:1323 -d kongjak/koreatech-board-api:latest
+```
+
+### Binary
+1. [GitHub Releases](https://github.com/kongwoojin/koreatech-board-api/releases)에서 적합한 최신 릴리즈를 다운로드합니다.
+2. DB 정보를 .env 파일에 작성합니다.
+```
+EDGEDB_HOST=HOST
+EDGEDB_PORT=PORT
+EDGEDB_DBNAME=DBNAME
+EDGEDB_USER=USER
+EDGEDB_PASSWD=PASSWD
+```
+3. 다운로드 받은 바이너리 파일을 실행힙니다.
+``` console
+./koreatech-board-api
+```
+
 ## 지원하는 게시판
 * [한국기술교육대학교](https://koreatech.ac.kr/)
 * [한국기술교육대학교 생활관](https://dorm.koreatech.ac.kr/)
