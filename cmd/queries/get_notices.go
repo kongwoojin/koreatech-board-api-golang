@@ -89,6 +89,10 @@ func GetNotices(c echo.Context) error {
 		lastPage = int(math.Ceil(float64(count[0]) / float64(numOfItems)))
 	}
 
+	for result := range results {
+		results[result].Num = count[0] - int64(page-1)*int64(numOfItems) - int64(result)
+	}
+
 	apiData := model.APIData{
 		StatusCode: status,
 		LastPage:   lastPage,
