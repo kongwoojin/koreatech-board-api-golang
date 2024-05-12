@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/edgedb/edgedb-go"
 	"github.com/joho/godotenv"
+	"koreatech-board-api/cmd/utils"
 	"log"
 	"os"
 )
@@ -12,9 +13,11 @@ import (
 var Pool = connect()
 
 func connect() *edgedb.Client {
-	err := godotenv.Load()
-	if err != nil {
-		//log.Fatal("Error loading .env file")
+	if !utils.IsRunningInContainer() {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
 	}
 
 	edgeDBHost := os.Getenv("EDGEDB_HOST")

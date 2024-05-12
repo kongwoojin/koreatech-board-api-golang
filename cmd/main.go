@@ -8,6 +8,7 @@ import (
 	echoSwagger "github.com/swaggo/echo-swagger"
 	_ "koreatech-board-api/cmd/docs"
 	"koreatech-board-api/cmd/routes"
+	"koreatech-board-api/cmd/utils"
 	"os"
 )
 
@@ -35,17 +36,26 @@ func main() {
 	// Echo instance
 	e := echo.New()
 
-	f, err := os.Create("access.log")
+	if utils.IsRunningInContainer() {
+		// If running in container, log to stdout
+		e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+			Format: "${time_rfc3339}: ip=${remote_ip}, method=${method}, uri=${uri}, status=${status}, user_agent=${user_agent}\n",
+			Output: os.Stdout,
+		}))
+	} else {
+		// If running in local, log to file
+		f, err := os.Create("access.log")
 
-	if err != nil {
-		panic(err)
+		if err != nil {
+			panic(err)
+		}
+
+		e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+			Format: "${time_rfc3339}: ip=${remote_ip}, method=${method}, uri=${uri}, status=${status}, user_agent=${user_agent}\n",
+			Output: f,
+		}))
 	}
 
-	// Middleware
-	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
-		Format: "${time_rfc3339}: ip=${remote_ip}, method=${method}, uri=${uri}, status=${status}, user_agent=${user_agent}\n",
-		Output: f,
-	}))
 	e.Use(middleware.Recover())
 
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
