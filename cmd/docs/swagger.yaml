@@ -32,6 +32,10 @@ definitions:
         type: array
       id:
         type: string
+      is_notice:
+        type: boolean
+      num:
+        type: integer
       status_code:
         description: Status code of request
         type: integer
@@ -46,6 +50,10 @@ definitions:
     properties:
       id:
         type: string
+      is_new:
+        type: boolean
+      is_notice:
+        type: boolean
       num:
         type: integer
       read_count:
@@ -191,6 +199,56 @@ paths:
         "404":
           description: Not Found
       summary: Search article by title
+      tags:
+      - Notice
+  /{department}/{board}/widget:
+    get:
+      consumes:
+      - application/json
+      description: Get minumum notice list for board widget, only 5 new notices
+      parameters:
+      - description: name of the department
+        enum:
+        - arch
+        - cse
+        - dorm
+        - mse
+        - ace
+        - ide
+        - ite
+        - mechanical
+        - mechatronics
+        - school
+        - sim
+        in: path
+        name: department
+        required: true
+        type: string
+      - description: name of the board
+        enum:
+        - notice
+        - free
+        - job
+        - pds
+        - lecture
+        - bachelor
+        - scholar
+        in: path
+        name: board
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.APIData'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Get minumum notice list
       tags:
       - Notice
   /article:

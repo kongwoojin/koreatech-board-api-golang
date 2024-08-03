@@ -10,5 +10,6 @@ func APIRouter(e *echo.Echo) {
 
 	g.GET("/article", queries.GetArticle)
 	g.GET("/:department/:board", queries.GetNotices)
+	g.GET("/:department/:board/widget", queries.GetMinimumNotices)
 	g.GET("/:department/:board/search/title", queries.SearchWithTitle)
 }

@@ -221,6 +221,73 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/{department}/{board}/widget": {
+            "get": {
+                "description": "Get minumum notice list for board widget, only 5 new notices",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Notice"
+                ],
+                "summary": "Get minumum notice list",
+                "parameters": [
+                    {
+                        "enum": [
+                            "arch",
+                            "cse",
+                            "dorm",
+                            "mse",
+                            "ace",
+                            "ide",
+                            "ite",
+                            "mechanical",
+                            "mechatronics",
+                            "school",
+                            "sim"
+                        ],
+                        "type": "string",
+                        "description": "name of the department",
+                        "name": "department",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "enum": [
+                            "notice",
+                            "free",
+                            "job",
+                            "pds",
+                            "lecture",
+                            "bachelor",
+                            "scholar"
+                        ],
+                        "type": "string",
+                        "description": "name of the board",
+                        "name": "board",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.APIData"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -270,6 +337,12 @@ const docTemplate = `{
                 "id": {
                     "type": "string"
                 },
+                "is_notice": {
+                    "type": "boolean"
+                },
+                "num": {
+                    "type": "integer"
+                },
                 "status_code": {
                     "description": "Status code of request",
                     "type": "integer"
@@ -290,6 +363,12 @@ const docTemplate = `{
             "properties": {
                 "id": {
                     "type": "string"
+                },
+                "is_new": {
+                    "type": "boolean"
+                },
+                "is_notice": {
+                    "type": "boolean"
                 },
                 "num": {
                     "type": "integer"
