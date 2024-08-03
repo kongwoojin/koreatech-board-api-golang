@@ -1,0 +1,45 @@
+name: Build koreatech-board-api
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+env:
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+
+jobs:
+  xgo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build
+        uses: crazy-max/ghaction-xgo@v3
+        with:
+          xgo_version: latest
+          go_version: 1.21
+          dest: build
+          prefix: koreatech-board-api
+          targets: windows/amd64,linux/amd64,linux/arm64
+          v: true
+          x: false
+          race: false
+          ldflags: -s -w
+          buildmode: default
+          trimpath: true
+
+      - name: Set MODIFIED_BRANCH_NAME
+        env:
+          name: "${{env.BRANCH_NAME}}"
+        run: |
+          echo "MODIFIED_BRANCH_NAME=${name/\//-}" >> $GITHUB_ENV
+
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: Koreatech-Board-${{ env.MODIFIED_BRANCH_NAME }}-debug
+          path: ./build
